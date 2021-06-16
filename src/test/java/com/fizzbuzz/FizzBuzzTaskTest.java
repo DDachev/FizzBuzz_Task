@@ -1,33 +1,24 @@
 package com.fizzbuzz;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
 import com.fizzbuzz.Buzz;
 import com.fizzbuzz.Fizz;
 import com.fizzbuzz.FizzBuzzTask;
-import com.fizzbuzz.Operation;
 
 public class FizzBuzzTaskTest {
 	
-	@Mock
-	private FizzBuzzTask objectUnderTest;
-
-	private List<Operation> operations;
+	private List<IntOperation> operations;
 	private List<String> input;
 
 	@Before
 	public void setup() {
-		MockitoAnnotations.initMocks(this);
 		input = new ArrayList<>();
 		input.add("1");
 		input.add("3");
@@ -46,20 +37,10 @@ public class FizzBuzzTaskTest {
 
 	@Test
 	public void validateDataTest() {
-		assertEquals(false, objectUnderTest.validateData(new ArrayList<String>(), operations));
-		assertEquals(false, objectUnderTest.validateData(input, new ArrayList<Operation>()));
+		assertEquals(false, FizzBuzzTask.validateData(null, null));
+		assertEquals(false, FizzBuzzTask.validateData(new ArrayList<String>(), new ArrayList<IntOperation>()));
+		assertEquals(false, FizzBuzzTask.validateData(new ArrayList<String>(), operations));
+		assertEquals(false, FizzBuzzTask.validateData(input, new ArrayList<IntOperation>()));
 	}
 
-	@Test
-	public void printAnswerTest_with_valid_data() {
-		objectUnderTest.validateData(input, operations);
-		verify(objectUnderTest, never()).printAnswer(input, operations);
-	}
-
-	@Test
-	public void printAnswerTest_with_not_valid_data() {
-		objectUnderTest.validateData(new ArrayList<String>(), operations);
-		verify(objectUnderTest, never()).printAnswer(input, operations);
-	}
-	
 }

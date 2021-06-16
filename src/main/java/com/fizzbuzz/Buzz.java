@@ -1,9 +1,9 @@
 package com.fizzbuzz;
 
-public class Buzz implements Operation{
+public class Buzz implements IntOperation{
 
 	@Override
-	public String calculate(int number) {
+	public String calculate(Integer number) {
 		if(number % 5 == 0) {
 			return "Buzz";
 		}

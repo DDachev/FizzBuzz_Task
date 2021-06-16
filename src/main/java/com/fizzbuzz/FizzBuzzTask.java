@@ -14,23 +14,26 @@ public class FizzBuzzTask {
 		input.add("5");
 		input.add("15");
 		
-		FizzBuzzTask task = new FizzBuzzTask();
-		List<Operation> operations = initOperations();
+		List<IntOperation> operations = initOperations();
 		
-		if (task.validateData(input, operations)) {
-			task.printAnswer(input, operations);
+		if (validateData(input, operations)) {
+			Translator<Integer, IntOperation> translator = new Translator<>(operations);
+			
+			for(String i : input) {
+				System.out.println(translator.translate(Integer.parseInt(i)));
+			}
 		}
 	}
 	
-	private static List<Operation> initOperations() {
-		List<Operation> operations = new ArrayList<>();
+	private static List<IntOperation> initOperations() {
+		List<IntOperation> operations = new ArrayList<>();
 		operations.add(new Fizz());
 		operations.add(new Buzz());
 		
 		return operations;
 	}
 	
-	public boolean validateData(List<String> input, List<Operation> operations) {
+	public static boolean validateData(List<String> input, List<IntOperation> operations) {
 		if(input == null || input.isEmpty()) {
 			System.out.println("The input is null or empty.");
 			return false;
@@ -42,22 +45,5 @@ public class FizzBuzzTask {
 		}
 		
 		return true;
-	}
-	
-	public void printAnswer(List<String> input, List<Operation> operations) {
-		StringBuilder answer = new StringBuilder();
-		
-		for(String i : input) {
-			for(Operation o : operations) {
-				answer.append(o.calculate(Integer.parseInt(i)));
-			}
-			
-			if(answer.length() == 0) {
-				System.out.println(i);
-				continue;
-			}
-			System.out.println(answer);
-			answer.delete(0,  answer.length());
-		}
 	}
 }

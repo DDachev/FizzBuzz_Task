@@ -9,11 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.fizzbuzz.Buzz;
-import com.fizzbuzz.Operation;
 
 public class BuzzTest {
 	
-	private Operation objectUnderTest;
+	private Buzz objectUnderTest;
 	private List<String> input;
 	
 	@Before
@@ -26,8 +25,9 @@ public class BuzzTest {
 		objectUnderTest = new Buzz();
 	}
 	
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void calculateTest() {
+		assertEquals("", objectUnderTest.calculate(null));
 		assertEquals("", objectUnderTest.calculate(Integer.parseInt(input.get(0))));
 		assertEquals("", objectUnderTest.calculate(Integer.parseInt(input.get(1))));
 		assertEquals("Buzz", objectUnderTest.calculate(Integer.parseInt(input.get(2))));	

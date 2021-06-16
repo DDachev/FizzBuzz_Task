@@ -1,5 +1,5 @@
 package com.fizzbuzz;
 
-public interface Operation {
-	public String calculate(int number);
+public interface Operation<T> {
+	public String calculate(T obj);
 }
